@@ -48,9 +48,9 @@ namespace Competencies
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(318, 58);
+            this.buttonCreate.Location = new System.Drawing.Point(16, 109);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(167, 44);
+            this.buttonCreate.Size = new System.Drawing.Size(80, 30);
             this.buttonCreate.TabIndex = 4;
             this.buttonCreate.Text = "Сохранить";
             this.buttonCreate.UseVisualStyleBackColor = true;
@@ -60,7 +60,7 @@ namespace Competencies
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(30, 9);
+            this.label2.Location = new System.Drawing.Point(12, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 20);
             this.label2.TabIndex = 5;
@@ -68,9 +68,9 @@ namespace Competencies
             // 
             // buttonOpen
             // 
-            this.buttonOpen.Location = new System.Drawing.Point(34, 58);
+            this.buttonOpen.Location = new System.Drawing.Point(16, 37);
             this.buttonOpen.Name = "buttonOpen";
-            this.buttonOpen.Size = new System.Drawing.Size(167, 44);
+            this.buttonOpen.Size = new System.Drawing.Size(80, 30);
             this.buttonOpen.TabIndex = 6;
             this.buttonOpen.Text = "Открыть";
             this.buttonOpen.UseVisualStyleBackColor = true;
@@ -83,10 +83,10 @@ namespace Competencies
             // labelNameOfExcelFile
             // 
             this.labelNameOfExcelFile.AutoSize = true;
-            this.labelNameOfExcelFile.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfExcelFile.Location = new System.Drawing.Point(30, 133);
+            this.labelNameOfExcelFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameOfExcelFile.Location = new System.Drawing.Point(102, 41);
             this.labelNameOfExcelFile.Name = "labelNameOfExcelFile";
-            this.labelNameOfExcelFile.Size = new System.Drawing.Size(140, 23);
+            this.labelNameOfExcelFile.Size = new System.Drawing.Size(117, 20);
             this.labelNameOfExcelFile.TabIndex = 7;
             this.labelNameOfExcelFile.Text = "Файл не выбран";
             // 
@@ -94,26 +94,26 @@ namespace Competencies
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(314, 9);
+            this.label1.Location = new System.Drawing.Point(12, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 40);
+            this.label1.Size = new System.Drawing.Size(340, 20);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Выберете место куда \r\nхотите сохранить документы";
+            this.label1.Text = "Выберете место куда хотите сохранить документы";
             // 
             // labelLoading
             // 
             this.labelLoading.AutoSize = true;
-            this.labelLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelLoading.Location = new System.Drawing.Point(173, 219);
+            this.labelLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelLoading.Location = new System.Drawing.Point(12, 163);
             this.labelLoading.Name = "labelLoading";
-            this.labelLoading.Size = new System.Drawing.Size(152, 31);
+            this.labelLoading.Size = new System.Drawing.Size(92, 20);
             this.labelLoading.TabIndex = 9;
             this.labelLoading.Text = "Ожидание ";
             this.labelLoading.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(34, 293);
+            this.progressBar1.Location = new System.Drawing.Point(16, 186);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(438, 23);
             this.progressBar1.TabIndex = 10;
@@ -123,7 +123,7 @@ namespace Competencies
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(520, 351);
+            this.ClientSize = new System.Drawing.Size(470, 225);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.labelLoading);
             this.Controls.Add(this.label1);
