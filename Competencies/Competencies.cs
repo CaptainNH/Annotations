@@ -30,43 +30,53 @@ namespace Competencies
         public static string SelectAbbreviation()
         {
             string[] directionName = _Excel.titlePage.Cells[2][18].Value.Split();
-            string s = "";
-            for (int i = 2; i < directionName.Length; i++)
-            {
-                if (directionName[i] != "Профиль")
-                {
-                    if (directionName[i].Length > 1)                    
-                        s += Char.ToUpper(directionName[i][0]);    
-                }                                                                       
-                else
-                    break;
-            }
-            return s;
+            string abbreviation = "";
+            if (directionName[2] == "Прикладная")
+                abbreviation = "ПМ";
+            else if (directionName[2] == "Информатика")
+                abbreviation = "ИВТ";
+            else if (directionName[2] == "Математика")
+                abbreviation = "МАТ";
+            else
+                abbreviation = "ПОМИ";
+            //for (int i = 2; i < directionName.Length; i++)
+            //{
+            //    if (directionName[i] != "Профиль")
+            //    {
+            //        if (directionName[i].Length > 1)
+            //            abbreviation += Char.ToUpper(directionName[i][0]);
+            //    }
+            //    else
+            //        break;
+            //}
+            return abbreviation;
         } 
 
         public static void CollectionData(Excel.Worksheet worksheet, int index)
         {
-            
-                courses = "";
-                directionCode = _Excel.titlePage.Cells[2][16].Value;
-                directionAbbreviation = SelectAbbreviation();
-                subjectName = worksheet.Cells[3][index].Value;
-                subjectIndex = worksheet.Cells[2][index].Value;
-                subjectCompetencies = worksheet.Cells[75][index].Value;           
-                creditUnits = worksheet.Cells[8][index].Value;                            
-                if (worksheet.Cells[4][index].Value != null)
-                    isExam = true;
-                if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
-                    isTest = true;
-                for (int i = 17; i <= 59; i += 14) 
-                {                   
-                    if((worksheet.Cells[i][index].Value != null || worksheet.Cells[i+7][index].Value != null) 
-                        || (worksheet.Cells[i+1][index].Value != null || worksheet.Cells[i + 8][index].Value != null))
-                    {
-                        courses += worksheet.Cells[i][1].Value.Split()[1] + " ";
-                    }
-                }
-                courses = courses.Substring(0, courses.Length - 1);
+            string currentYear = _Excel.titlePage.Cells[20][30].Value;
+            string startYear = _Excel.titlePage.Cells[20][29].Value;
+            int currentCourse = Convert.ToInt32(currentYear.Split('-')[1]) - Convert.ToInt32(startYear);
+            courses = currentCourse.ToString();
+            directionCode = _Excel.titlePage.Cells[2][16].Value;
+            directionAbbreviation = SelectAbbreviation();
+            subjectName = worksheet.Cells[3][index].Value;
+            subjectIndex = worksheet.Cells[2][index].Value;
+            subjectCompetencies = worksheet.Cells[75][index].Value;           
+            creditUnits = worksheet.Cells[8][index].Value;                            
+            if (worksheet.Cells[4][index].Value != null)
+                isExam = true;
+            if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
+                isTest = true;
+            //for (int i = 17; i <= 59; i += 14) 
+            //{                   
+            //    if((worksheet.Cells[i][index].Value != null || worksheet.Cells[i+7][index].Value != null) 
+            //        || (worksheet.Cells[i+1][index].Value != null || worksheet.Cells[i + 8][index].Value != null))
+            //    {
+            //        courses += worksheet.Cells[i][1].Value.Split()[1] + " ";
+            //    }
+            //}
+            //courses = courses.Substring(0, courses.Length - 1);
         }
         
         private static Dictionary<string, string> CreateCompetenciesDic(Excel.Worksheet worksheet)
@@ -131,7 +141,7 @@ namespace Competencies
                 subjectInPath = RemoveExtraChars(subjectName);
             else
                 subjectInPath = subjectName;
-            path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + " " + courses; var resultList = SelectCompetencies(worksheet, plan);
+            path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + courses; var resultList = SelectCompetencies(worksheet, plan);
             //DocX resultDoc = DocX.Create(path);
             var resultDoc = DocX.Create(path);
             var competencies = "\t" + string.Join("\n\t", resultList);
