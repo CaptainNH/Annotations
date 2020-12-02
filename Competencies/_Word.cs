@@ -59,7 +59,7 @@ namespace Competencies
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
-            disciplineScope.Append($"{creditUnits} зачетных единиц.").
+            disciplineScope.Append($"Зачетных единиц {creditUnits}").
                 Font("Times New Roman").
                 FontSize(12);
         }
