@@ -21,6 +21,7 @@ namespace Competencies
         public static string creditUnits = "";
         public static bool isExam = false;
         public static bool isTest = false;
+        public static int progressBarMax = 0;
 
         public Competencies()
         {
@@ -115,13 +116,9 @@ namespace Competencies
             foreach (var item in s)
             {
                 if (item == ':')
-                {
                     str += ' ';
-                }
                 else
-                {
                     str += item;
-                }
             }
             return str;
         }
@@ -144,6 +141,13 @@ namespace Competencies
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             SelectlFile.SelectExcelFile(openFileDialogSelectFile,labelNameOfExcelFile);
+            for (int i = 6; i < TotalSize(_Excel.worksheetPlan); i++)
+            {
+                if (_Excel.worksheetPlan.Cells[74][i].Value != null)
+                {
+                    progressBarMax++;
+                }
+            }
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -153,14 +157,16 @@ namespace Competencies
             {
                 try
                 {
+                    progressBar1.Maximum = progressBarMax;
                     int lastRow = TotalSize(_Excel.worksheetPlan);
-                    labelLoading.Text = "Загрузка";
+                    labelLoading.Text = "Загрузка...";
                     for (int i = 6; i <= lastRow; i++)
                     {
                         if (_Excel.worksheetPlan.Cells[74][i].Value != null)
                         {
                             CollectionData(_Excel.worksheetPlan, i);
                             WriteCompetencyInFile(_Excel.worksheet, _Excel.worksheetPlan);
+                            progressBar1.Value++;
                         }
                     }
                     labelLoading.Text = "Загрузка завершена";

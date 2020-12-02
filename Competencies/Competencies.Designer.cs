@@ -39,6 +39,7 @@ namespace Competencies
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.labelLoading = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // saveFileDialogSaveFile
@@ -83,7 +84,7 @@ namespace Competencies
             // 
             this.labelNameOfExcelFile.AutoSize = true;
             this.labelNameOfExcelFile.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfExcelFile.Location = new System.Drawing.Point(30, 116);
+            this.labelNameOfExcelFile.Location = new System.Drawing.Point(30, 133);
             this.labelNameOfExcelFile.Name = "labelNameOfExcelFile";
             this.labelNameOfExcelFile.Size = new System.Drawing.Size(140, 23);
             this.labelNameOfExcelFile.TabIndex = 7;
@@ -103,18 +104,27 @@ namespace Competencies
             // 
             this.labelLoading.AutoSize = true;
             this.labelLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelLoading.Location = new System.Drawing.Point(161, 167);
+            this.labelLoading.Location = new System.Drawing.Point(173, 219);
             this.labelLoading.Name = "labelLoading";
             this.labelLoading.Size = new System.Drawing.Size(152, 31);
             this.labelLoading.TabIndex = 9;
             this.labelLoading.Text = "Ожидание ";
+            this.labelLoading.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(34, 293);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(438, 23);
+            this.progressBar1.TabIndex = 10;
             // 
             // Competencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(520, 230);
+            this.ClientSize = new System.Drawing.Size(520, 351);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.labelLoading);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelNameOfExcelFile);
@@ -140,5 +150,6 @@ namespace Competencies
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label labelLoading;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
