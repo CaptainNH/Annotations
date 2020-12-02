@@ -11,21 +11,21 @@ namespace Competencies
 {
     class _Word
     {
-        public static DocX resultDoc = DocX.Create(Competencies.path);
+        //public static DocX resultDoc = DocX.Create(Competencies.path);
         
-        public static void CreateWordTemplate(string competencies)
+        public static void CreateWordTemplate(string competencies, DocX resultDoc)
         {
-            CreateTitle(Competencies.subjectName);
-            CreateFirstParagraph(Competencies.subjectName, Competencies.subjectIndex);
-            CreateSecondParagraph(Competencies.creditUnits);
-            CreateThirdParagraph();
-            CreateFourthParagraph(competencies);
-            CreateFifthParagraph(Competencies.isExam, Competencies.isTest);
-            CreateSixthParagraph();
+            CreateTitle(Competencies.subjectName, resultDoc);
+            CreateFirstParagraph(Competencies.subjectName, Competencies.subjectIndex, resultDoc);
+            CreateSecondParagraph(Competencies.creditUnits, resultDoc);
+            CreateThirdParagraph(resultDoc);
+            CreateFourthParagraph(competencies, resultDoc);
+            CreateFifthParagraph(Competencies.isExam, Competencies.isTest, resultDoc);
+            CreateSixthParagraph(resultDoc);
             //resultDoc.Save();
         }
         
-        private static void CreateTitle(string subjectName)
+        private static void CreateTitle(string subjectName, DocX resultDoc)
         {
             resultDoc.InsertParagraph("АННОТАЦИЯ РАБОЧЕЙ ПРОГРАММЫ ДИСЦИПЛИНЫ").
                     Font("Times New Roman").
@@ -40,7 +40,7 @@ namespace Competencies
             resultDoc.InsertParagraph().AppendLine();
         }
 
-        private static void CreateFirstParagraph(string subjectName, string subjectIndex)
+        private static void CreateFirstParagraph(string subjectName, string subjectIndex, DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph disciplinePlace =
                     resultDoc.InsertParagraph("\t1. Место дисциплины в структуре ОПОП.").
@@ -52,19 +52,19 @@ namespace Competencies
                 FontSize(12);
         }
 
-        private static void CreateSecondParagraph(string creditUnits)
+        private static void CreateSecondParagraph(string creditUnits, DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph disciplineScope =
                     resultDoc.InsertParagraph("\t2. Объем дисциплины: ").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
-            disciplineScope.Append($"Зачетных единиц: {creditUnits} ").
+            disciplineScope.Append($"{creditUnits} зачетных единиц.").
                 Font("Times New Roman").
                 FontSize(12);
         }
 
-        private static void CreateThirdParagraph()
+        private static void CreateThirdParagraph(DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph disciplineContent =
                     resultDoc.InsertParagraph("\t3. Содержание дисциплины: ").
@@ -73,7 +73,7 @@ namespace Competencies
                     Bold();
         }
 
-        private static void CreateFourthParagraph(string competencies)
+        private static void CreateFourthParagraph(string competencies, DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph plannedResults =
                     resultDoc.InsertParagraph("\t4. Планируемые результаты обучения по дисциплине.").
@@ -88,7 +88,7 @@ namespace Competencies
                 FontSize(12);
         }
 
-        private static void CreateFifthParagraph(bool isExam, bool isTest)
+        private static void CreateFifthParagraph(bool isExam, bool isTest, DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph controlForms =
                    resultDoc.InsertParagraph("\t5. Форма контроля: ").
@@ -103,7 +103,7 @@ namespace Competencies
                 controlForms.Append("зачёт/экзамен.").Font("Times New Roman").FontSize(12);
         }
 
-        private static void CreateSixthParagraph()
+        private static void CreateSixthParagraph(DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph developer =
                     resultDoc.InsertParagraph("\t6. Разработчик: ").

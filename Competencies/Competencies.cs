@@ -132,9 +132,10 @@ namespace Competencies
             else
                 subjectInPath = subjectName;
             path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + " " + courses; var resultList = SelectCompetencies(worksheet, plan);
-            DocX resultDoc = DocX.Create(path);
+            //DocX resultDoc = DocX.Create(path);
+            var resultDoc = DocX.Create(path);
             var competencies = "\t" + string.Join("\n\t", resultList);
-            _Word.CreateWordTemplate(competencies);
+            _Word.CreateWordTemplate(competencies, resultDoc);
             resultDoc.Save();
         }
 
