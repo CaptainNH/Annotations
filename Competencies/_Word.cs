@@ -16,7 +16,7 @@ namespace Competencies
         public static void CreateWordTemplate(string competencies, DocX resultDoc)
         {
             CreateTitle(Competencies.subjectName, resultDoc);
-            CreateFirstParagraph(Competencies.subjectName, Competencies.subjectIndex, resultDoc);
+            CreateFirstParagraph(Competencies.subjectName, Competencies.subjectIndex, Competencies.subjectIndexDecoding, resultDoc);
             CreateSecondParagraph(Competencies.creditUnits, resultDoc);
             CreateThirdParagraph(resultDoc);
             CreateFourthParagraph(competencies, resultDoc);
@@ -40,14 +40,14 @@ namespace Competencies
             resultDoc.InsertParagraph().AppendLine();
         }
 
-        private static void CreateFirstParagraph(string subjectName, string subjectIndex, DocX resultDoc)
+        private static void CreateFirstParagraph(string subjectName, string subjectIndex,string subjectIndexDecoding, DocX resultDoc )
         {
             Xceed.Document.NET.Paragraph disciplinePlace =
                     resultDoc.InsertParagraph("\t1. Место дисциплины в структуре ОПОП.").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
-            disciplinePlace.AppendLine($"\tДисциплина «{subjectName}» относится к дисциплинам {subjectIndex}").
+            disciplinePlace.AppendLine($"\tДисциплина «{subjectName}» относится к дисциплинам {subjectIndexDecoding} {subjectIndex}").
                 Font("Times New Roman").
                 FontSize(12);
         }
