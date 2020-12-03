@@ -14,7 +14,6 @@ namespace Competencies
         public static string directionCode = "";
         public static string directionAbbreviation = "";
         public static string subjectIndex = "";
-        public static string subjectIndexDecoding = "";
         public static string subjectName = "";
         public static string subjectCompetencies = "";
         public static string courses = "";
@@ -23,14 +22,11 @@ namespace Competencies
         public static bool isExam = false;
         public static bool isTest = false;
         public static int progressBarMax = 0;
-        public static string BlockName = "";
-        public static string BlockCode = "";
 
         public Competencies()
         {
             InitializeComponent();
         }
-
         public static string SelectAbbreviation()
         {
             //Создаем аббревиатуры направлений.
@@ -55,7 +51,7 @@ namespace Competencies
             //        break;
             //}
             return abbreviation;
-        }
+        } 
 
         public static void CollectionData(Excel.Worksheet worksheet, int index)
         {
@@ -68,24 +64,9 @@ namespace Competencies
             directionAbbreviation = SelectAbbreviation();
             subjectName = worksheet.Cells[3][index].Value;
             subjectIndex = worksheet.Cells[2][index].Value;
-            string[] s = subjectIndex.Split('.');
-            subjectIndexDecoding = "";
-            if (s[0].ToLower() != BlockCode)
-            {
-                BlockCode = s[0];
-                BlockName = worksheet.Cells[1][index - 2].Value;;
-            }
-            subjectIndexDecoding += BlockName + ".";    
-            if (s[1] == "Б")
-                subjectIndexDecoding += "Базовая часть. ";
-            else
-                subjectIndexDecoding += "Вариативная часть. ";
-            if (s.Length > 2)
-                if (s[2] == "ДВ")
-                    subjectIndexDecoding += "Дисциплины по выбору";
             subjectCompetencies = worksheet.Cells[75][index].Value;
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
-                creditUnits = int.Parse(worksheet.Cells[8][index].Value);           
+                creditUnits = int.Parse(worksheet.Cells[8][index].Value);        
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
             if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
@@ -136,7 +117,7 @@ namespace Competencies
                 if (!string.IsNullOrEmpty(item))
                 {
                     if (dic.ContainsKey(item))
-                        resultList.Add("-" + dic[item] + ", " + item);
+                        resultList.Add("-" + dic[item] + " " + $"({item})");
                 }
             }
             return resultList;
@@ -167,7 +148,7 @@ namespace Competencies
             path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + courses; var resultList = SelectCompetencies(worksheet, plan);
             //DocX resultDoc = DocX.Create(path);
             var resultDoc = DocX.Create(path);
-            var competencies = "\t" + string.Join("\n\t", resultList);
+            var competencies = "\t" + string.Join(";\n\t", resultList) + ".";
             _Word.CreateWordTemplate(competencies, resultDoc);
             resultDoc.Save();
         }
