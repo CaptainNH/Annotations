@@ -59,9 +59,12 @@ namespace Competencies
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
-            disciplineScope.Append(ChangeDeclination(creditUnits)).
-                Font("Times New Roman").
-                FontSize(12);
+            if (creditUnits != 0)
+            {
+                disciplineScope.Append(ChangeDeclination(creditUnits)).
+                    Font("Times New Roman").
+                    FontSize(12);
+            }
         }
 
         private static string ChangeDeclination(int creditUnits)

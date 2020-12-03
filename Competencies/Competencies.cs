@@ -65,10 +65,8 @@ namespace Competencies
             subjectName = worksheet.Cells[3][index].Value;
             subjectIndex = worksheet.Cells[2][index].Value;
             subjectCompetencies = worksheet.Cells[75][index].Value;
-            if (string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
-                creditUnits = 0;
-            else
-                creditUnits = worksheet.Cells[8][index].Value;                  
+            if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
+                creditUnits = worksheet.Cells[8][index].Value;           
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
             if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
