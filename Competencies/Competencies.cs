@@ -23,8 +23,8 @@ namespace Competencies
         public static bool isExam = false;
         public static bool isTest = false;
         public static int progressBarMax = 0;
-        public static string BlockName = "";
-        public static string BlockCode = "";
+        private static string BlockName = "";
+        private static string BlockCode = "";
 
         public Competencies()
         {
@@ -54,9 +54,9 @@ namespace Competencies
             //        break;
             //}
             return abbreviation;
-        } 
+        }
 
-        public static void CollectionData(Excel.Worksheet worksheet, int index)
+        public static void PrepareData(Excel.Worksheet worksheet, int index)
         {
             //Подготавливаем данные для работы.
             string currentYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][30].Value;
@@ -67,21 +67,7 @@ namespace Competencies
             directionAbbreviation = SelectAbbreviation();
             subjectName = worksheet.Cells[3][index].Value;
             subjectIndex = worksheet.Cells[2][index].Value;
-            string[] s = subjectIndex.Split('.');
-            subjectIndexDecoding = "";
-            if (s[0].ToLower()!= BlockCode)
-            {
-                BlockCode = s[0].ToLower();
-                BlockName = worksheet.Cells[1][index - 2].Value;
-            }
-            subjectIndexDecoding += BlockName + ". ";
-            if (s[1].ToLower() == "б")
-                subjectIndexDecoding += "Базовая часть. ";
-            else
-                subjectIndexDecoding += "Вариативная часть. ";
-            if (s.Length > 2)
-                if (s[2].ToLower() == "дв")
-                    subjectIndexDecoding += "Дисциплины по выбору";
+            subjectIndexDecoding = DecodeSubjectIndex(worksheet, index);
             subjectCompetencies = worksheet.Cells[75][index].Value;
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);        
@@ -98,6 +84,26 @@ namespace Competencies
             //    }
             //}
             //courses = courses.Substring(0, courses.Length - 1);
+        }
+
+        private static string DecodeSubjectIndex(Excel.Worksheet worksheet, int index) 
+        {
+            string[] s = subjectIndex.Split('.');
+            subjectIndexDecoding = "";
+            if (s[0].ToLower() != BlockCode)
+            {
+                BlockCode = s[0].ToLower();
+                BlockName = worksheet.Cells[1][index - 2].Value;
+            }
+            subjectIndexDecoding += BlockName + ". ";
+            if (s[1].ToLower() == "б")
+                subjectIndexDecoding += "Базовая часть. ";
+            else
+                subjectIndexDecoding += "Вариативная часть. ";
+            if (s.Length > 2)
+                if (s[2].ToLower() == "дв")
+                    subjectIndexDecoding += "Дисциплины по выбору";
+            return subjectIndexDecoding;
         }
         
         private static Dictionary<string, string> CreateCompetenciesDic(Excel.Worksheet worksheet)
@@ -199,7 +205,7 @@ namespace Competencies
                     {
                         if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
                         {
-                            CollectionData(_Excel.worksheetWorkPlanPlan, i);
+                            PrepareData(_Excel.worksheetWorkPlanPlan, i);
                             WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
                             progressBar1.Value++;
                         }
