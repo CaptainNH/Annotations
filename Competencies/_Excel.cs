@@ -11,16 +11,25 @@ namespace Competencies
     class _Excel
     {
         public static Excel.Application xlApp = null;
-        public static Excel.Workbook xlWb = null;
-        public static Excel.Worksheet worksheet = null;
-        public static Excel.Worksheet worksheetPlan = null;
-        public static Excel.Worksheet titlePage = null;
+        //
+        public static Excel.Workbook xlWorkPlan = null;
+        public static Excel.Worksheet worksheetWorkPlanComp = null;
+        public static Excel.Worksheet worksheetWorkPlanPlan = null;
+        public static Excel.Worksheet worksheetWorkPlanTitlePage = null;
+        //
+        public static Excel.Workbook xlWorkDevelopers = null;
+        public static Excel.Worksheet xlReferenceKo204 = null;
 
         public static void ClearExcel()
         {
-            Marshal.ReleaseComObject(worksheet);
-            Marshal.ReleaseComObject(worksheetPlan);
-            Marshal.ReleaseComObject(xlWb);
+            //
+            Marshal.ReleaseComObject(xlWorkPlan);
+            Marshal.ReleaseComObject(worksheetWorkPlanComp);
+            Marshal.ReleaseComObject(worksheetWorkPlanPlan);
+            //
+            Marshal.ReleaseComObject(xlWorkDevelopers);
+            Marshal.ReleaseComObject(xlReferenceKo204);
+            //
             Marshal.ReleaseComObject(xlApp);
         }
     }

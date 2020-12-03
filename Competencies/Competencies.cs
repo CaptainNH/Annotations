@@ -33,7 +33,7 @@ namespace Competencies
         public static string SelectAbbreviation()
         {
             //Создаем аббревиатуры направлений.
-            string[] directionName = _Excel.titlePage.Cells[2][18].Value.Split();
+            string[] directionName = _Excel.worksheetWorkPlanTitlePage.Cells[2][18].Value.Split();
             string abbreviation = "";
             if (directionName[2] == "Прикладная")
                 abbreviation = "ПМ";
@@ -59,11 +59,11 @@ namespace Competencies
         public static void CollectionData(Excel.Worksheet worksheet, int index)
         {
             //Подготавливаем данные для работы.
-            string currentYear = _Excel.titlePage.Cells[20][30].Value;
-            string startYear = _Excel.titlePage.Cells[20][29].Value;
+            string currentYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][30].Value;
+            string startYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][29].Value;
             int currentCourse = Convert.ToInt32(currentYear.Split('-')[1]) - Convert.ToInt32(startYear);
             courses = currentCourse.ToString();
-            directionCode = _Excel.titlePage.Cells[2][16].Value;
+            directionCode = _Excel.worksheetWorkPlanTitlePage.Cells[2][16].Value;
             directionAbbreviation = SelectAbbreviation();
             subjectName = worksheet.Cells[3][index].Value;
             subjectIndex = worksheet.Cells[2][index].Value;
@@ -174,10 +174,10 @@ namespace Competencies
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             //Открываем файл
-            SelectlFile.SelectExcelFile(openFileDialogSelectFile,labelNameOfExcelFile);
-            for (int i = 6; i < TotalSize(_Excel.worksheetPlan); i++)
+            SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile,labelNameOfWorkPlanFile);
+            for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
             {
-                if (_Excel.worksheetPlan.Cells[74][i].Value != null)
+                if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
                 {
                     progressBarMax++;
                 }
@@ -193,14 +193,14 @@ namespace Competencies
                 try
                 {
                     progressBar1.Maximum = progressBarMax;
-                    int lastRow = TotalSize(_Excel.worksheetPlan);
+                    int lastRow = TotalSize(_Excel.worksheetWorkPlanPlan);
                     labelLoading.Text = "Загрузка...";
                     for (int i = 6; i <= lastRow; i++)
                     {
-                        if (_Excel.worksheetPlan.Cells[74][i].Value != null)
+                        if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
                         {
-                            CollectionData(_Excel.worksheetPlan, i);
-                            WriteCompetencyInFile(_Excel.worksheet, _Excel.worksheetPlan);
+                            CollectionData(_Excel.worksheetWorkPlanPlan, i);
+                            WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
                             progressBar1.Value++;
                         }
                     }
@@ -211,6 +211,11 @@ namespace Competencies
                     MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }           
+        }
+
+        private void buttonOpenDevelopersFile_Click(object sender, EventArgs e)
+        {
+            SelectFile.SelectExcelDeveopersFile(openFileDialogSelectFile, labelNameOfDevelopersFile);
         }
     }
 }

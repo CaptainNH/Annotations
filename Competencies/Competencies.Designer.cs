@@ -35,11 +35,13 @@ namespace Competencies
             this.label2 = new System.Windows.Forms.Label();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.openFileDialogSelectFile = new System.Windows.Forms.OpenFileDialog();
-            this.labelNameOfExcelFile = new System.Windows.Forms.Label();
+            this.labelNameOfWorkPlanFile = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.labelLoading = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.labelNameOfDevelopersFile = new System.Windows.Forms.Label();
+            this.buttonOpenDevelopersFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveFileDialogSaveFile
@@ -80,15 +82,15 @@ namespace Competencies
             // 
             this.openFileDialogSelectFile.Filter = "Excel|*.xls|Excel|*.xlsx";
             // 
-            // labelNameOfExcelFile
+            // labelNameOfWorkPlanFile
             // 
-            this.labelNameOfExcelFile.AutoSize = true;
-            this.labelNameOfExcelFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfExcelFile.Location = new System.Drawing.Point(102, 41);
-            this.labelNameOfExcelFile.Name = "labelNameOfExcelFile";
-            this.labelNameOfExcelFile.Size = new System.Drawing.Size(117, 20);
-            this.labelNameOfExcelFile.TabIndex = 7;
-            this.labelNameOfExcelFile.Text = "Файл не выбран";
+            this.labelNameOfWorkPlanFile.AutoSize = true;
+            this.labelNameOfWorkPlanFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameOfWorkPlanFile.Location = new System.Drawing.Point(102, 41);
+            this.labelNameOfWorkPlanFile.Name = "labelNameOfWorkPlanFile";
+            this.labelNameOfWorkPlanFile.Size = new System.Drawing.Size(117, 20);
+            this.labelNameOfWorkPlanFile.TabIndex = 7;
+            this.labelNameOfWorkPlanFile.Text = "Файл не выбран";
             // 
             // label1
             // 
@@ -118,16 +120,38 @@ namespace Competencies
             this.progressBar1.Size = new System.Drawing.Size(438, 23);
             this.progressBar1.TabIndex = 10;
             // 
+            // labelNameOfDevelopersFile
+            // 
+            this.labelNameOfDevelopersFile.AutoSize = true;
+            this.labelNameOfDevelopersFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameOfDevelopersFile.Location = new System.Drawing.Point(403, 41);
+            this.labelNameOfDevelopersFile.Name = "labelNameOfDevelopersFile";
+            this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(117, 20);
+            this.labelNameOfDevelopersFile.TabIndex = 11;
+            this.labelNameOfDevelopersFile.Text = "Файл не выбран";
+            // 
+            // buttonOpenDevelopersFile
+            // 
+            this.buttonOpenDevelopersFile.Location = new System.Drawing.Point(283, 37);
+            this.buttonOpenDevelopersFile.Name = "buttonOpenDevelopersFile";
+            this.buttonOpenDevelopersFile.Size = new System.Drawing.Size(80, 30);
+            this.buttonOpenDevelopersFile.TabIndex = 12;
+            this.buttonOpenDevelopersFile.Text = "Открыть";
+            this.buttonOpenDevelopersFile.UseVisualStyleBackColor = true;
+            this.buttonOpenDevelopersFile.Click += new System.EventHandler(this.buttonOpenDevelopersFile_Click);
+            // 
             // Competencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(470, 225);
+            this.ClientSize = new System.Drawing.Size(580, 300);
+            this.Controls.Add(this.buttonOpenDevelopersFile);
+            this.Controls.Add(this.labelNameOfDevelopersFile);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.labelLoading);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelNameOfExcelFile);
+            this.Controls.Add(this.labelNameOfWorkPlanFile);
             this.Controls.Add(this.buttonOpen);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonCreate);
@@ -146,10 +170,12 @@ namespace Competencies
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.OpenFileDialog openFileDialogSelectFile;
-        private System.Windows.Forms.Label labelNameOfExcelFile;
+        private System.Windows.Forms.Label labelNameOfWorkPlanFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label labelLoading;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label labelNameOfDevelopersFile;
+        private System.Windows.Forms.Button buttonOpenDevelopersFile;
     }
 }
