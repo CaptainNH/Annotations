@@ -18,7 +18,7 @@ namespace Competencies
         public static string subjectCompetencies = "";
         public static string courses = "";
         public static string path = "";
-        public static string creditUnits = "";
+        public static int creditUnits;
         public static bool isExam = false;
         public static bool isTest = false;
         public static int progressBarMax = 0;
@@ -29,6 +29,7 @@ namespace Competencies
         }
         public static string SelectAbbreviation()
         {
+            //Создаем аббревиатуры направлений.
             string[] directionName = _Excel.titlePage.Cells[2][18].Value.Split();
             string abbreviation = "";
             if (directionName[2] == "Прикладная")
@@ -54,6 +55,7 @@ namespace Competencies
 
         public static void CollectionData(Excel.Worksheet worksheet, int index)
         {
+            //Подготавливаем данные для работы.
             string currentYear = _Excel.titlePage.Cells[20][30].Value;
             string startYear = _Excel.titlePage.Cells[20][29].Value;
             int currentCourse = Convert.ToInt32(currentYear.Split('-')[1]) - Convert.ToInt32(startYear);
@@ -62,8 +64,11 @@ namespace Competencies
             directionAbbreviation = SelectAbbreviation();
             subjectName = worksheet.Cells[3][index].Value;
             subjectIndex = worksheet.Cells[2][index].Value;
-            subjectCompetencies = worksheet.Cells[75][index].Value;           
-            creditUnits = worksheet.Cells[8][index].Value;                            
+            subjectCompetencies = worksheet.Cells[75][index].Value;
+            if (string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
+                creditUnits = 0;
+            else
+                creditUnits = worksheet.Cells[8][index].Value;                  
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
             if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
@@ -122,6 +127,7 @@ namespace Competencies
 
         public static string RemoveExtraChars(string s)
         {
+            //Удаляем лишние символы из названий предметов.
             string str = null;
             foreach (var item in s)
             {
@@ -151,6 +157,7 @@ namespace Competencies
 
         private void buttonOpen_Click(object sender, EventArgs e)
         {
+            //Открываем файл
             SelectlFile.SelectExcelFile(openFileDialogSelectFile,labelNameOfExcelFile);
             for (int i = 6; i < TotalSize(_Excel.worksheetPlan); i++)
             {
@@ -162,7 +169,8 @@ namespace Competencies
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
-        {                      
+        {                  
+            //Создаем файлы аннотаций.
             DialogResult res = folderBrowserDialog1.ShowDialog();
             if (res == DialogResult.OK)
             {

@@ -52,14 +52,14 @@ namespace Competencies
                 FontSize(12);
         }
 
-        private static void CreateSecondParagraph(string creditUnits, DocX resultDoc)
+        private static void CreateSecondParagraph(int creditUnits, DocX resultDoc)
         {
             Xceed.Document.NET.Paragraph disciplineScope =
                     resultDoc.InsertParagraph("\t2. Объем дисциплины: ").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
-            disciplineScope.Append(ChangeDeclination(int.Parse(creditUnits))).
+            disciplineScope.Append(ChangeDeclination(creditUnits)).
                 Font("Times New Roman").
                 FontSize(12);
         }
