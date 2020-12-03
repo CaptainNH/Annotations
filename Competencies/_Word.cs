@@ -59,9 +59,19 @@ namespace Competencies
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
-            disciplineScope.Append($"Зачетных единиц {creditUnits}").
+            disciplineScope.Append(ChangeDeclination(int.Parse(creditUnits))).
                 Font("Times New Roman").
                 FontSize(12);
+        }
+
+        private static string ChangeDeclination(int creditUnits)
+        {
+            
+            string s = $"{creditUnits} зачётных единиц.";
+            if (creditUnits % 10 == 1) s = $"{creditUnits} зачётная единица.";
+            if (creditUnits % 10 >= 2 && creditUnits % 10 <= 4) s = $"{creditUnits} зачётные единицы.";
+            if (creditUnits % 100 >= 11 & creditUnits % 100 <= 20) s = $"{creditUnits} зачётных единиц.";
+            return s;
         }
 
         private static void CreateThirdParagraph(DocX resultDoc)
