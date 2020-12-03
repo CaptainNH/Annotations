@@ -50,7 +50,7 @@ namespace Competencies
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(16, 109);
+            this.buttonCreate.Location = new System.Drawing.Point(16, 121);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(80, 30);
             this.buttonCreate.TabIndex = 4;
@@ -64,9 +64,9 @@ namespace Competencies
             this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(12, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 20);
+            this.label2.Size = new System.Drawing.Size(112, 20);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Выберете файл";
+            this.label2.Text = "Выберите файл";
             // 
             // buttonOpen
             // 
@@ -98,17 +98,17 @@ namespace Competencies
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(12, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(340, 20);
+            this.label1.Size = new System.Drawing.Size(341, 20);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Выберете место куда хотите сохранить документы";
+            this.label1.Text = "Выберите место куда хотите сохранить документы";
             // 
             // labelLoading
             // 
             this.labelLoading.AutoSize = true;
-            this.labelLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelLoading.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelLoading.Location = new System.Drawing.Point(12, 163);
             this.labelLoading.Name = "labelLoading";
-            this.labelLoading.Size = new System.Drawing.Size(92, 20);
+            this.labelLoading.Size = new System.Drawing.Size(78, 20);
             this.labelLoading.TabIndex = 9;
             this.labelLoading.Text = "Ожидание ";
             this.labelLoading.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -117,14 +117,14 @@ namespace Competencies
             // 
             this.progressBar1.Location = new System.Drawing.Point(16, 186);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(438, 23);
+            this.progressBar1.Size = new System.Drawing.Size(575, 23);
             this.progressBar1.TabIndex = 10;
             // 
             // labelNameOfDevelopersFile
             // 
             this.labelNameOfDevelopersFile.AutoSize = true;
             this.labelNameOfDevelopersFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfDevelopersFile.Location = new System.Drawing.Point(403, 41);
+            this.labelNameOfDevelopersFile.Location = new System.Drawing.Point(369, 41);
             this.labelNameOfDevelopersFile.Name = "labelNameOfDevelopersFile";
             this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(117, 20);
             this.labelNameOfDevelopersFile.TabIndex = 11;
@@ -145,7 +145,7 @@ namespace Competencies
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(580, 300);
+            this.ClientSize = new System.Drawing.Size(603, 326);
             this.Controls.Add(this.buttonOpenDevelopersFile);
             this.Controls.Add(this.labelNameOfDevelopersFile);
             this.Controls.Add(this.progressBar1);
