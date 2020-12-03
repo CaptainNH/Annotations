@@ -14,6 +14,7 @@ namespace Competencies
         public static string directionCode = "";
         public static string directionAbbreviation = "";
         public static string subjectIndex = "";
+        public static string subjectIndexDecoding = "";
         public static string subjectName = "";
         public static string subjectCompetencies = "";
         public static string courses = "";
@@ -22,6 +23,8 @@ namespace Competencies
         public static bool isExam = false;
         public static bool isTest = false;
         public static int progressBarMax = 0;
+        public static string BlockName = "";
+        public static string BlockCode = "";
 
         public Competencies()
         {
@@ -64,6 +67,21 @@ namespace Competencies
             directionAbbreviation = SelectAbbreviation();
             subjectName = worksheet.Cells[3][index].Value;
             subjectIndex = worksheet.Cells[2][index].Value;
+            string[] s = subjectIndex.Split('.');
+            subjectIndexDecoding = "";
+            if (s[0].ToLower()!= BlockCode)
+            {
+                BlockCode = s[0].ToLower();
+                BlockName = worksheet.Cells[1][index - 2].Value;
+            }
+            subjectIndexDecoding += BlockName + ". ";
+            if (s[1].ToLower() == "б")
+                subjectIndexDecoding += "Базовая часть. ";
+            else
+                subjectIndexDecoding += "Вариативная часть. ";
+            if (s.Length > 2)
+                if (s[2].ToLower() == "дв")
+                    subjectIndexDecoding += "Дисциплины по выбору";
             subjectCompetencies = worksheet.Cells[75][index].Value;
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);        
