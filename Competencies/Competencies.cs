@@ -23,8 +23,10 @@ namespace Competencies
         public static bool isExam = false;
         public static bool isTest = false;
         public static int progressBarMax = 0;
-        private static string BlockName = "";
-        private static string BlockCode = "";
+        private static string blockName = "";
+        private static string subsectionName = "";
+        private static string blockCode1 = "";
+        private static string blockCode2 = "";
 
         public Competencies()
         {
@@ -33,16 +35,19 @@ namespace Competencies
         public static string SelectAbbreviation()
         {
             //Создаем аббревиатуры направлений.
-            string[] directionName = _Excel.worksheetWorkPlanTitlePage.Cells[2][18].Value.Split();
+            string directionName = _Excel.worksheetWorkPlanTitlePage.Cells[2][18].Value;
             string abbreviation = "";
-            if (directionName[2] == "Прикладная")
+            if (directionName.Contains("  "))
+                directionName.Replace("  ", " ");
+            string[] splittedDirectionName = _Excel.worksheetWorkPlanTitlePage.Cells[2][18].Value.Split(' ');
+            if (splittedDirectionName[2] == "Прикладная")
                 abbreviation = "ПМ";
-            else if (directionName[2] == "Информатика")
+            else if (splittedDirectionName[2] == "Информатика")
                 abbreviation = "ИВТ";
-            else if (directionName[2] == "Математика")
-                abbreviation = "МАТ";
-            else
+            else if (splittedDirectionName[2] == "Педагогическое")
                 abbreviation = "ПОМИ";
+            else
+                abbreviation = "МАТ";
             //for (int i = 2; i < directionName.Length; i++)
             //{
             //    if (directionName[i] != "Профиль")
@@ -70,7 +75,7 @@ namespace Competencies
             subjectIndexDecoding = DecodeSubjectIndex(worksheet, index);
             subjectCompetencies = worksheet.Cells[75][index].Value;
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
-                creditUnits = int.Parse(worksheet.Cells[8][index].Value);        
+                creditUnits = int.Parse(worksheet.Cells[8][index].Value);
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
             if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
@@ -86,26 +91,34 @@ namespace Competencies
             //courses = courses.Substring(0, courses.Length - 1);
         }
 
-        private static string DecodeSubjectIndex(Excel.Worksheet worksheet, int index) 
+        private static string DecodeSubjectIndex(Excel.Worksheet worksheet, int index)
         {
             string[] s = subjectIndex.Split('.');
             subjectIndexDecoding = "";
-            if (s[0].ToLower() != BlockCode)
+            int i = index;
+            if (s[0].ToLower() != blockCode1 || s[1].ToLower() != blockCode2)
             {
-                BlockCode = s[0].ToLower();
-                BlockName = worksheet.Cells[1][index - 2].Value;
+                while (!string.IsNullOrEmpty(worksheet.Cells[2][i].Value))
+                    i--;
+                blockCode1 = s[0].ToLower();
+                blockCode2 = s[1].ToLower();
+                if (!string.IsNullOrEmpty(worksheet.Cells[1][i - 1].Value)) 
+                {
+                    blockName = worksheet.Cells[1][i - 1].Value + ". "; 
+                    subsectionName = worksheet.Cells[1][i].Value;
+                }
+                else
+                    subsectionName = worksheet.Cells[1][i].Value;
             }
-            subjectIndexDecoding += BlockName + ". ";
-            if (s[1].ToLower() == "б")
-                subjectIndexDecoding += "Базовая часть. ";
-            else
-                subjectIndexDecoding += "Вариативная часть. ";
+            subjectIndexDecoding += blockName + subsectionName + ". ";
             if (s.Length > 2)
+            {
                 if (s[2].ToLower() == "дв")
                     subjectIndexDecoding += "Дисциплины по выбору";
+            }
             return subjectIndexDecoding;
         }
-        
+
         private static Dictionary<string, string> CreateCompetenciesDic(Excel.Worksheet worksheet)
         {
             // Закидываем в словарь компетенции из листа "Компетенции".
@@ -180,7 +193,7 @@ namespace Competencies
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             //Открываем файл
-            SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile,labelNameOfWorkPlanFile);
+            SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile, labelNameOfWorkPlanFile);
             for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
             {
                 if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
@@ -191,37 +204,57 @@ namespace Competencies
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
-        {                  
-            //Создаем файлы аннотаций.
-            DialogResult res = folderBrowserDialog1.ShowDialog();
-            if (res == DialogResult.OK)
+        {
+            //Выбираем путь для файлов.
+            try
             {
-                try
-                {
-                    progressBar1.Maximum = progressBarMax;
-                    int lastRow = TotalSize(_Excel.worksheetWorkPlanPlan);
-                    labelLoading.Text = "Загрузка...";
-                    for (int i = 6; i <= lastRow; i++)
-                    {
-                        if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
-                        {
-                            PrepareData(_Excel.worksheetWorkPlanPlan, i);
-                            WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
-                            progressBar1.Value++;
-                        }
-                    }
-                    labelLoading.Text = "Загрузка завершена";
+                DialogResult res = folderBrowserDialog1.ShowDialog();
+                if (res == DialogResult.OK)
+                {                    
+                    labelNameOfFolder.Text = "Загрузка...";
+                    path = folderBrowserDialog1.SelectedPath;
+                    //_Excel.xlWorkDevelopers = _Excel.xlApp.Workbooks.Open(xlPath);
+                    //_Excel.xlReferenceKo204 = _Excel.xlWorkDevelopers.Worksheets["Справка КО 20-2"];
+                    labelNameOfFolder.Text = path;
+                    buttonGenerate.Enabled = true;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }           
+                else
+                    throw new Exception("Путь не выбран");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonOpenDevelopersFile_Click(object sender, EventArgs e)
         {
             SelectFile.SelectExcelDeveopersFile(openFileDialogSelectFile, labelNameOfDevelopersFile);
+        }
+
+        private void buttonGenerate_Click(object sender, EventArgs e)
+        {
+            //Создаем файлы аннотаций.            
+            try
+            {
+                progressBar1.Maximum = progressBarMax;
+                int lastRow = TotalSize(_Excel.worksheetWorkPlanPlan);
+                labelLoading.Text = "Загрузка...";
+                for (int i = 6; i <= lastRow; i++)
+                {
+                    if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
+                    {
+                        PrepareData(_Excel.worksheetWorkPlanPlan, i);
+                        WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
+                        progressBar1.Value++;
+                    }
+                }
+                labelLoading.Text = "Загрузка завершена";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
     }
 }

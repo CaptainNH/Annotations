@@ -27,8 +27,8 @@ namespace Competencies
             Marshal.ReleaseComObject(worksheetWorkPlanComp);
             Marshal.ReleaseComObject(worksheetWorkPlanPlan);
             //
-            Marshal.ReleaseComObject(xlWorkDevelopers);
-            Marshal.ReleaseComObject(xlReferenceKo204);
+            //Marshal.ReleaseComObject(xlWorkDevelopers);
+            //Marshal.ReleaseComObject(xlReferenceKo204);
             //
             Marshal.ReleaseComObject(xlApp);
         }
