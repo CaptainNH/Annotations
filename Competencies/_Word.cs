@@ -108,12 +108,12 @@ namespace Competencies
                    Font("Times New Roman").
                    FontSize(12).
                    Bold();
-            if (isExam || !isExam && !isTest)
+            if (isTest && isExam)
+                controlForms.Append("зачёт/экзамен.").Font("Times New Roman").FontSize(12);
+            else if (isExam || !isExam && !isTest)
                 controlForms.Append("экзамен.").Font("Times New Roman").FontSize(12);
             else if (isTest)
                 controlForms.Append("зачёт.").Font("Times New Roman").FontSize(12);
-            else if (isTest && isExam)
-                controlForms.Append("зачёт/экзамен.").Font("Times New Roman").FontSize(12);
         }
 
         private static void CreateSixthParagraph(DocX resultDoc)

@@ -78,7 +78,7 @@ namespace Competencies
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
-            if (worksheet.Cells[5][index].Value != null || (worksheet.Cells[6][index].Value != null))
+            if ((worksheet.Cells[5][index].Value != null) || (worksheet.Cells[6][index].Value != null))
                 isTest = true;
             //for (int i = 17; i <= 59; i += 14) 
             //{                   
@@ -247,6 +247,8 @@ namespace Competencies
                         PrepareData(_Excel.worksheetWorkPlanPlan, i);
                         WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
                         progressBar1.Value++;
+                        isExam = false;
+                        isTest = false;
                     }
                 }
                 labelLoading.Text = "Загрузка завершена";
