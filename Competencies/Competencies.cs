@@ -194,6 +194,8 @@ namespace Competencies
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             //Открываем файл
+            progressBar1.Maximum = 0;
+            progressBar1.Value = 0;
             SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile, labelNameOfWorkPlanFile);
             for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
             {
@@ -208,6 +210,7 @@ namespace Competencies
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             //Выбираем путь для файлов.
+            progressBar1.Value = 0;
             try
             {
                 DialogResult res = folderBrowserDialog1.ShowDialog();
@@ -254,6 +257,8 @@ namespace Competencies
                     }
                 }
                 labelLoading.Text = "Загрузка завершена";
+                buttonGenerate.Enabled = false;
+                buttonCreate.Enabled = false;
             }
             catch (Exception ex)
             {
