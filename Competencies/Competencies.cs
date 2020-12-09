@@ -202,6 +202,7 @@ namespace Competencies
                     progressBarMax++;
                 }
             }
+            buttonCreate.Enabled = true;
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)

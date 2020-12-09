@@ -52,6 +52,7 @@ namespace Competencies
             // 
             // buttonCreate
             // 
+            this.buttonCreate.Enabled = false;
             this.buttonCreate.Location = new System.Drawing.Point(21, 149);
             this.buttonCreate.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCreate.Name = "buttonCreate";
@@ -89,12 +90,11 @@ namespace Competencies
             // 
             // labelNameOfWorkPlanFile
             // 
-            this.labelNameOfWorkPlanFile.AutoSize = true;
             this.labelNameOfWorkPlanFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelNameOfWorkPlanFile.Location = new System.Drawing.Point(136, 50);
             this.labelNameOfWorkPlanFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNameOfWorkPlanFile.Name = "labelNameOfWorkPlanFile";
-            this.labelNameOfWorkPlanFile.Size = new System.Drawing.Size(146, 24);
+            this.labelNameOfWorkPlanFile.Size = new System.Drawing.Size(233, 33);
             this.labelNameOfWorkPlanFile.TabIndex = 7;
             this.labelNameOfWorkPlanFile.Text = "Файл не выбран";
             // 
@@ -139,7 +139,6 @@ namespace Competencies
             this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(146, 24);
             this.labelNameOfDevelopersFile.TabIndex = 11;
             this.labelNameOfDevelopersFile.Text = "Файл не выбран";
-            this.labelNameOfDevelopersFile.Visible = false;
             // 
             // buttonOpenDevelopersFile
             // 
@@ -150,7 +149,6 @@ namespace Competencies
             this.buttonOpenDevelopersFile.TabIndex = 12;
             this.buttonOpenDevelopersFile.Text = "Открыть";
             this.buttonOpenDevelopersFile.UseVisualStyleBackColor = true;
-            this.buttonOpenDevelopersFile.Visible = false;
             this.buttonOpenDevelopersFile.Click += new System.EventHandler(this.buttonOpenDevelopersFile_Click);
             // 
             // buttonGenerate
