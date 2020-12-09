@@ -64,16 +64,16 @@ namespace Competencies
         public static void PrepareData(Excel.Worksheet worksheet, int index)
         {
             //Подготавливаем данные для работы.
-            string currentYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][30].Value;
-            string startYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][29].Value;
+            string currentYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][30].Value.Trim(' ');
+            string startYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][29].Value.Trim(' ');
             int currentCourse = Convert.ToInt32(currentYear.Split('-')[1]) - Convert.ToInt32(startYear);
             courses = currentCourse.ToString();
-            directionCode = _Excel.worksheetWorkPlanTitlePage.Cells[2][16].Value;
+            directionCode = _Excel.worksheetWorkPlanTitlePage.Cells[2][16].Value.Trim(' ');
             directionAbbreviation = SelectAbbreviation();
-            subjectName = worksheet.Cells[3][index].Value;
-            subjectIndex = worksheet.Cells[2][index].Value;
+            subjectName = worksheet.Cells[3][index].Value.Trim(' ');
+            subjectIndex = worksheet.Cells[2][index].Value.Trim(' ');
             subjectIndexDecoding = DecodeSubjectIndex(worksheet, index);
-            subjectCompetencies = worksheet.Cells[75][index].Value;
+            subjectCompetencies = worksheet.Cells[75][index].Value.Trim(' ');
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);
             if (worksheet.Cells[4][index].Value != null)
@@ -104,17 +104,18 @@ namespace Competencies
                 blockCode2 = s[1].ToLower();
                 if (!string.IsNullOrEmpty(worksheet.Cells[1][i - 1].Value)) 
                 {
-                    blockName = worksheet.Cells[1][i - 1].Value + ". "; 
-                    subsectionName = worksheet.Cells[1][i].Value;
+                    blockName = worksheet.Cells[1][i - 1].Value.Trim(' ') + ". "; 
+                    subsectionName = worksheet.Cells[1][i].Value.Trim(' ');
                 }
                 else
-                    subsectionName = worksheet.Cells[1][i].Value;
+                    subsectionName = worksheet.Cells[1][i].Value.Trim(' ');
             }
-            subjectIndexDecoding += blockName + subsectionName + ". ";
+            if(!string.IsNullOrEmpty(blockName) && !string.IsNullOrEmpty(subsectionName))
+                subjectIndexDecoding += blockName + subsectionName + ". ";
             if (s.Length > 2)
             {
                 if (s[2].ToLower() == "дв")
-                    subjectIndexDecoding += "Дисциплины по выбору";
+                    subjectIndexDecoding += "Дисциплины по выбору.";
             }
             return subjectIndexDecoding;
         }
@@ -196,7 +197,7 @@ namespace Competencies
             SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile, labelNameOfWorkPlanFile);
             for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
             {
-                if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
+                if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
                 {
                     progressBarMax++;
                 }
@@ -242,7 +243,7 @@ namespace Competencies
                 labelLoading.Text = "Загрузка...";
                 for (int i = 6; i <= lastRow; i++)
                 {
-                    if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null)
+                    if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
                     {
                         PrepareData(_Excel.worksheetWorkPlanPlan, i);
                         WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
