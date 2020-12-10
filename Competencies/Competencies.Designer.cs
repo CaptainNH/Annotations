@@ -44,6 +44,7 @@ namespace Competencies
             this.buttonOpenDevelopersFile = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.labelNameOfFolder = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // saveFileDialogSaveFile
@@ -69,9 +70,9 @@ namespace Competencies
             this.label2.Location = new System.Drawing.Point(16, 17);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 24);
+            this.label2.Size = new System.Drawing.Size(211, 24);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Выберите файл";
+            this.label2.Text = "Выберите рабочий план";
             // 
             // buttonOpen
             // 
@@ -131,12 +132,11 @@ namespace Competencies
             // 
             // labelNameOfDevelopersFile
             // 
-            this.labelNameOfDevelopersFile.AutoSize = true;
             this.labelNameOfDevelopersFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelNameOfDevelopersFile.Location = new System.Drawing.Point(492, 50);
             this.labelNameOfDevelopersFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNameOfDevelopersFile.Name = "labelNameOfDevelopersFile";
-            this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(146, 24);
+            this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(296, 33);
             this.labelNameOfDevelopersFile.TabIndex = 11;
             this.labelNameOfDevelopersFile.Text = "Файл не выбран";
             // 
@@ -173,12 +173,23 @@ namespace Competencies
             this.labelNameOfFolder.TabIndex = 14;
             this.labelNameOfFolder.Text = "Папка не выбрана";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(377, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(248, 24);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Выберите кадровую справку";
+            // 
             // Competencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(804, 401);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelNameOfFolder);
             this.Controls.Add(this.buttonGenerate);
             this.Controls.Add(this.buttonOpenDevelopersFile);
@@ -214,5 +225,6 @@ namespace Competencies
         private System.Windows.Forms.Button buttonOpenDevelopersFile;
         private System.Windows.Forms.Button buttonGenerate;
         private System.Windows.Forms.Label labelNameOfFolder;
+        private System.Windows.Forms.Label label3;
     }
 }

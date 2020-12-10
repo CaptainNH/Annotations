@@ -57,7 +57,7 @@ namespace Competencies
                     NameOfDevelopersFile.Text = "Загрузка...";
                     string xlPath = SelectFile.FileName;
                     _Excel.xlWorkDevelopers = _Excel.xlApp.Workbooks.Open(xlPath);
-                    _Excel.xlReferenceKo204 = _Excel.xlWorkDevelopers.Worksheets["Справка КО 20-2"];
+                    _Excel.xlReferenceKo202 = (Excel.Worksheet)_Excel.xlWorkDevelopers.Sheets[1];
                     NameOfDevelopersFile.Text = Path.GetFileNameWithoutExtension(xlPath);
                 }
                 else

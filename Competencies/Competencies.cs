@@ -27,6 +27,8 @@ namespace Competencies
         private static string subsectionName = "";
         private static string blockCode1 = "";
         private static string blockCode2 = "";
+        public static string developerReference = "";
+        private static Dictionary<string, string> developersDic = null;
 
         public Competencies()
         {
@@ -61,7 +63,7 @@ namespace Competencies
             return abbreviation;
         }
 
-        public static void PrepareData(Excel.Worksheet worksheet, int index)
+        public static void PrepareData(Excel.Worksheet worksheet, Excel.Worksheet xlReference, int index)
         {
             //Подготавливаем данные для работы.
             string currentYear = _Excel.worksheetWorkPlanTitlePage.Cells[20][30].Value.Trim(' ');
@@ -74,6 +76,7 @@ namespace Competencies
             subjectIndex = worksheet.Cells[2][index].Value.Trim(' ');
             subjectIndexDecoding = DecodeSubjectIndex(worksheet, index);
             subjectCompetencies = worksheet.Cells[75][index].Value.Trim(' ');
+            developerReference = developersDic[subjectName.Replace(" ", "")];
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);
             if (worksheet.Cells[4][index].Value != null)
@@ -136,6 +139,64 @@ namespace Competencies
             return dic;
         }
 
+        private static void CreateDevelopersDic(Excel.Worksheet xlReference)
+        {
+            developersDic = new Dictionary<string, string>();
+            int lastRow = TotalSize(xlReference);
+            var keySubject = "";
+            string reference = "";
+            for (int i = 4; i < lastRow; i++)
+            {                
+                if (!string.IsNullOrEmpty(xlReference.Cells[2][i].Value))
+                {
+                    keySubject = xlReference.Cells[2][i].Value.Replace(" ", "");
+                    var position = MakePosition(xlReference, i);
+                    var fullName = MakeInitials(xlReference.Cells[3][i].Value);
+                    if (!string.IsNullOrEmpty(position))
+                        reference = position + " " + fullName;
+                    else reference = fullName;
+                }
+                else
+                {
+                    while (string.IsNullOrEmpty(xlReference.Cells[2][i].Value))
+                    {
+                        var position = MakePosition(xlReference, i);
+                        var fullName = MakeInitials(xlReference.Cells[3][i].Value);
+                        if (!string.IsNullOrEmpty(position))
+                            reference += ", " + position + " " + fullName;
+                        else reference += ", " + fullName;
+                        i++;
+                    }
+                    i--;
+                }
+                developersDic[keySubject] = reference;
+            }
+        }
+
+        private static string MakePosition(Excel.Worksheet xlReference, int index)
+        {
+            var position = "";
+            if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("доцент"))
+                position = "доцент";
+            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("ассистент") || xlReference.Cells[5][index].Value.Split(',')[0].Contains("асистент"))
+                position = "ассистент";
+            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("старший преподаватель"))
+                position = "старший преподаватель";
+            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("профессор") || xlReference.Cells[5][index].Value.Split(',')[0].Contains("зав."))
+                position = "профессор";
+            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("декан"))
+                position = "декан факультета математики и компьютерных наук";
+            else position = "";
+            return position;
+        }
+
+        private static string MakeInitials(string fullName)
+        {
+            string[] s = fullName.Replace("  ", " ").Split();
+            string initials = s[0] + " " + s[1][0] + "." + s[2][0] + ".";
+            return initials;
+        }
+
         public static int TotalSize(Excel.Worksheet worksheet)
         {
             // Находим кол-во строк.
@@ -183,7 +244,8 @@ namespace Competencies
                 subjectInPath = RemoveExtraChars(subjectName);
             else
                 subjectInPath = subjectName;
-            path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + courses; var resultList = SelectCompetencies(worksheet, plan);
+            path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + courses;
+            var resultList = SelectCompetencies(worksheet, plan);
             //DocX resultDoc = DocX.Create(path);
             var resultDoc = DocX.Create(path);
             var competencies = "\t" + string.Join(";\n\t", resultList) + ".";
@@ -218,8 +280,6 @@ namespace Competencies
                 {                    
                     labelNameOfFolder.Text = "Загрузка...";
                     path = folderBrowserDialog1.SelectedPath;
-                    //_Excel.xlWorkDevelopers = _Excel.xlApp.Workbooks.Open(xlPath);
-                    //_Excel.xlReferenceKo204 = _Excel.xlWorkDevelopers.Worksheets["Справка КО 20-2"];
                     labelNameOfFolder.Text = path;
                     buttonGenerate.Enabled = true;
                 }
@@ -235,6 +295,7 @@ namespace Competencies
         private void buttonOpenDevelopersFile_Click(object sender, EventArgs e)
         {
             SelectFile.SelectExcelDeveopersFile(openFileDialogSelectFile, labelNameOfDevelopersFile);
+            CreateDevelopersDic(_Excel.xlReferenceKo202);
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
@@ -249,7 +310,7 @@ namespace Competencies
                 {
                     if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
                     {
-                        PrepareData(_Excel.worksheetWorkPlanPlan, i);
+                        PrepareData(_Excel.worksheetWorkPlanPlan, _Excel.xlReferenceKo202, i);
                         WriteCompetencyInFile(_Excel.worksheetWorkPlanComp, _Excel.worksheetWorkPlanPlan);
                         progressBar1.Value++;
                         isExam = false;

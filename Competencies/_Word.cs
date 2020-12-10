@@ -21,7 +21,7 @@ namespace Competencies
             CreateThirdParagraph(resultDoc);
             CreateFourthParagraph(competencies, resultDoc);
             CreateFifthParagraph(Competencies.isExam, Competencies.isTest, resultDoc);
-            CreateSixthParagraph(resultDoc);
+            CreateSixthParagraph(resultDoc, Competencies.developerReference);
             //resultDoc.Save();
         }
         
@@ -116,13 +116,14 @@ namespace Competencies
                 controlForms.Append("зачёт.").Font("Times New Roman").FontSize(12);
         }
 
-        private static void CreateSixthParagraph(DocX resultDoc)
+        private static void CreateSixthParagraph(DocX resultDoc, string developerReference)
         {
             Xceed.Document.NET.Paragraph developer =
                     resultDoc.InsertParagraph("\t6. Разработчик: ").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
+            developer.Append(developerReference).Font("Times New Roman").FontSize(12);
         }
     }
 }
