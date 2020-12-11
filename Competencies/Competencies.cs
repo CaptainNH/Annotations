@@ -139,7 +139,7 @@ namespace Competencies
             return dic;
         }
 
-        private static void CreateDevelopersDic(Excel.Worksheet xlReference)
+        public static void CreateDevelopersDic(Excel.Worksheet xlReference)
         {
             developersDic = new Dictionary<string, string>();
             int lastRow = TotalSize(xlReference);
@@ -182,8 +182,10 @@ namespace Competencies
                 position = "ассистент";
             else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("старший преподаватель"))
                 position = "старший преподаватель";
-            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("профессор") || xlReference.Cells[5][index].Value.Split(',')[0].Contains("зав."))
+            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("профессор"))
                 position = "профессор";
+            else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("зав."))
+                position = xlReference.Cells[5][index].Value.Split(',')[1].Trim(' ');
             else if (xlReference.Cells[5][index].Value.Split(',')[0].Contains("декан"))
                 position = "декан факультета математики и компьютерных наук";
             else position = "";
@@ -295,7 +297,6 @@ namespace Competencies
         private void buttonOpenDevelopersFile_Click(object sender, EventArgs e)
         {
             SelectFile.SelectExcelDeveopersFile(openFileDialogSelectFile, labelNameOfDevelopersFile);
-            CreateDevelopersDic(_Excel.xlReferenceKo202);
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)

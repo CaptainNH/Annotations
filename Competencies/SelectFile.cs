@@ -57,8 +57,9 @@ namespace Competencies
                     NameOfDevelopersFile.Text = "Загрузка...";
                     string xlPath = SelectFile.FileName;
                     _Excel.xlWorkDevelopers = _Excel.xlApp.Workbooks.Open(xlPath);
-                    _Excel.xlReferenceKo202 = (Excel.Worksheet)_Excel.xlWorkDevelopers.Sheets[1];
+                    _Excel.xlReferenceKo202 = (Excel.Worksheet)_Excel.xlWorkDevelopers.Sheets["Справка КО 20-2"];
                     NameOfDevelopersFile.Text = Path.GetFileNameWithoutExtension(xlPath);
+                    Competencies.CreateDevelopersDic(_Excel.xlReferenceKo202);
                 }
                 else
                     throw new Exception("Файл не выбран");
