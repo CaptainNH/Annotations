@@ -258,17 +258,30 @@ namespace Competencies
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             //Открываем файл
-            progressBar1.Maximum = 0;
-            progressBar1.Value = 0;
-            SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile, labelNameOfWorkPlanFile);
-            for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
+            try
             {
-                if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
+                DialogResult res = openFileDialogSelectFile.ShowDialog();
+                if (res == DialogResult.OK)
                 {
-                    progressBarMax++;
+                    progressBar1.Maximum = 0;
+                    progressBar1.Value = 0;
+                    SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile, labelNameOfWorkPlanFile);
+                    for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
+                    {
+                        if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
+                        {
+                            progressBarMax++;
+                        }
+                    }
+                    buttonCreate.Enabled = true;
                 }
+                else
+                    throw new Exception("Файл не выбран");
             }
-            buttonCreate.Enabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -296,7 +309,20 @@ namespace Competencies
 
         private void buttonOpenDevelopersFile_Click(object sender, EventArgs e)
         {
-            SelectFile.SelectExcelDeveopersFile(openFileDialogSelectFile, labelNameOfDevelopersFile);
+            try
+            {
+                DialogResult res = openFileDialogSelectFile.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    SelectFile.SelectExcelDeveopersFile(openFileDialogSelectFile, labelNameOfDevelopersFile);
+                }
+                else
+                    throw new Exception("Файл не выбран");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonGenerate_Click(object sender, EventArgs e)
@@ -307,6 +333,7 @@ namespace Competencies
                 progressBar1.Maximum = progressBarMax;
                 int lastRow = TotalSize(_Excel.worksheetWorkPlanPlan);
                 labelLoading.Text = "Загрузка...";
+                CreateDevelopersDic(_Excel.xlReferenceKo202);
                 for (int i = 6; i <= lastRow; i++)
                 {
                     if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)

@@ -57,9 +57,9 @@ namespace Competencies
             this.buttonCreate.Location = new System.Drawing.Point(21, 149);
             this.buttonCreate.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(107, 37);
+            this.buttonCreate.Size = new System.Drawing.Size(147, 37);
             this.buttonCreate.TabIndex = 4;
-            this.buttonCreate.Text = "Сохранить";
+            this.buttonCreate.Text = "Выбрать папку";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
@@ -87,7 +87,7 @@ namespace Competencies
             // 
             // openFileDialogSelectFile
             // 
-            this.openFileDialogSelectFile.Filter = "Excel|*.xls|Excel|*.xlsx";
+            this.openFileDialogSelectFile.Filter = "Excel File(*.xls; *.xlsx;)|*.xls; *.xlsx";
             // 
             // labelNameOfWorkPlanFile
             // 
@@ -167,7 +167,7 @@ namespace Competencies
             // 
             this.labelNameOfFolder.AutoSize = true;
             this.labelNameOfFolder.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfFolder.Location = new System.Drawing.Point(136, 153);
+            this.labelNameOfFolder.Location = new System.Drawing.Point(175, 153);
             this.labelNameOfFolder.Name = "labelNameOfFolder";
             this.labelNameOfFolder.Size = new System.Drawing.Size(160, 24);
             this.labelNameOfFolder.TabIndex = 14;
@@ -204,7 +204,7 @@ namespace Competencies
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Competencies";
-            this.Text = "Competencies";
+            this.Text = "Аннотации";
             this.ResumeLayout(false);
             this.PerformLayout();
 
