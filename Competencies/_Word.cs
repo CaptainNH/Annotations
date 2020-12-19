@@ -12,38 +12,39 @@ namespace Competencies
     class _Word
     {
         //public static DocX resultDoc = DocX.Create(Competencies.path);
+        public DocX document;
         
-        public static void CreateWordTemplate(string competencies, DocX resultDoc)
+        public void CreateWordTemplate(string competencies)
         {
-            CreateTitle(Competencies.subjectName, resultDoc);
-            CreateFirstParagraph(Competencies.subjectName, Competencies.subjectIndex, Competencies.subjectIndexDecoding, resultDoc);
-            CreateSecondParagraph(Competencies.creditUnits, resultDoc);
-            CreateThirdParagraph(resultDoc);
-            CreateFourthParagraph(competencies, resultDoc);
-            CreateFifthParagraph(Competencies.isExam, Competencies.isTest, resultDoc);
-            CreateSixthParagraph(resultDoc, Competencies.developerReference);
-            //resultDoc.Save();
+            CreateTitle(Competencies.subjectName);
+            CreateFirstParagraph(Competencies.subjectName, Competencies.subjectIndex, Competencies.subjectIndexDecoding);
+            CreateSecondParagraph(Competencies.creditUnits);
+            CreateThirdParagraph();
+            CreateFourthParagraph(competencies);
+            CreateFifthParagraph(Competencies.isExam, Competencies.isTest);
+            CreateSixthParagraph(Competencies.developerReference);
+            document.Save();
         }
         
-        private static void CreateTitle(string subjectName, DocX resultDoc)
+        private void CreateTitle(string subjectName)
         {
-            resultDoc.InsertParagraph("АННОТАЦИЯ РАБОЧЕЙ ПРОГРАММЫ ДИСЦИПЛИНЫ").
+            document.InsertParagraph("АННОТАЦИЯ РАБОЧЕЙ ПРОГРАММЫ ДИСЦИПЛИНЫ").
                     Font("Times New Roman").
                     FontSize(14).
                     Bold().
                     Alignment = Xceed.Document.NET.Alignment.center;
-            resultDoc.InsertParagraph($"«{subjectName}»").
+            document.InsertParagraph($"«{subjectName}»").
                 Font("Times New Roman").
                 FontSize(14).
                 Bold().
                 Alignment = Xceed.Document.NET.Alignment.center;
-            resultDoc.InsertParagraph().AppendLine();
+            document.InsertParagraph().AppendLine();
         }
 
-        private static void CreateFirstParagraph(string subjectName, string subjectIndex,string subjectIndexDecoding, DocX resultDoc )
+        private void CreateFirstParagraph(string subjectName, string subjectIndex,string subjectIndexDecoding)
         {
             Xceed.Document.NET.Paragraph disciplinePlace =
-                    resultDoc.InsertParagraph("\t1. Место дисциплины в структуре ОПОП.").
+                    document.InsertParagraph("\t1. Место дисциплины в структуре ОПОП.").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
@@ -52,10 +53,10 @@ namespace Competencies
                 FontSize(12);
         }
 
-        private static void CreateSecondParagraph(int creditUnits, DocX resultDoc)
+        private void CreateSecondParagraph(int creditUnits)
         {
             Xceed.Document.NET.Paragraph disciplineScope =
-                    resultDoc.InsertParagraph("\t2. Объем дисциплины: ").
+                    document.InsertParagraph("\t2. Объем дисциплины: ").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
@@ -67,7 +68,7 @@ namespace Competencies
             }
         }
 
-        private static string ChangeDeclination(int creditUnits)
+        private string ChangeDeclination(int creditUnits)
         {
             
             string s = $"{creditUnits} зачётных единиц.";
@@ -77,19 +78,19 @@ namespace Competencies
             return s;
         }
 
-        private static void CreateThirdParagraph(DocX resultDoc)
+        private void CreateThirdParagraph()
         {
             Xceed.Document.NET.Paragraph disciplineContent =
-                    resultDoc.InsertParagraph("\t3. Содержание дисциплины: ").
+                    document.InsertParagraph("\t3. Содержание дисциплины: ").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
         }
 
-        private static void CreateFourthParagraph(string competencies, DocX resultDoc)
+        private void CreateFourthParagraph(string competencies)
         {
             Xceed.Document.NET.Paragraph plannedResults =
-                    resultDoc.InsertParagraph("\t4. Планируемые результаты обучения по дисциплине.").
+                    document.InsertParagraph("\t4. Планируемые результаты обучения по дисциплине.").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();
@@ -101,10 +102,10 @@ namespace Competencies
                 FontSize(12);
         }
 
-        private static void CreateFifthParagraph(bool isExam, bool isTest, DocX resultDoc)
+        private void CreateFifthParagraph(bool isExam, bool isTest)
         {
             Xceed.Document.NET.Paragraph controlForms =
-                   resultDoc.InsertParagraph("\t5. Форма контроля: ").
+                   document.InsertParagraph("\t5. Форма контроля: ").
                    Font("Times New Roman").
                    FontSize(12).
                    Bold();
@@ -116,10 +117,10 @@ namespace Competencies
                 controlForms.Append("зачёт.").Font("Times New Roman").FontSize(12);
         }
 
-        private static void CreateSixthParagraph(DocX resultDoc, string developerReference)
+        private void CreateSixthParagraph(string developerReference)
         {
             Xceed.Document.NET.Paragraph developer =
-                    resultDoc.InsertParagraph("\t6. Разработчик: ").
+                    document.InsertParagraph("\t6. Разработчик: ").
                     Font("Times New Roman").
                     FontSize(12).
                     Bold();

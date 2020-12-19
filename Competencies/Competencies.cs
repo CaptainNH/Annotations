@@ -76,7 +76,8 @@ namespace Competencies
             subjectIndex = worksheet.Cells[2][index].Value.Trim(' ');
             subjectIndexDecoding = DecodeSubjectIndex(worksheet, index);
             subjectCompetencies = worksheet.Cells[75][index].Value.Trim(' ');
-            developerReference = developersDic[subjectName.Replace(" ", "")];
+            if (_Excel.xlReferenceKo202 != null)
+                developerReference = developersDic[subjectName.Replace(" ", "")];
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);
             if (worksheet.Cells[4][index].Value != null)
@@ -249,10 +250,10 @@ namespace Competencies
             path = folderBrowserDialog1.SelectedPath + @"\Аннотация_" + directionCode + " " + subjectInPath + " " + directionAbbreviation + courses;
             var resultList = SelectCompetencies(worksheet, plan);
             //DocX resultDoc = DocX.Create(path);
-            var resultDoc = DocX.Create(path);
+            var resultDoc = new _Word();
+            resultDoc.document = DocX.Create(path);
             var competencies = "\t" + string.Join(";\n\t", resultList) + ".";
-            _Word.CreateWordTemplate(competencies, resultDoc);
-            resultDoc.Save();
+            resultDoc.CreateWordTemplate(competencies);
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)
@@ -333,7 +334,8 @@ namespace Competencies
                 progressBar1.Maximum = progressBarMax;
                 int lastRow = TotalSize(_Excel.worksheetWorkPlanPlan);
                 labelLoading.Text = "Загрузка...";
-                CreateDevelopersDic(_Excel.xlReferenceKo202);
+                if(_Excel.xlReferenceKo202 != null)
+                    CreateDevelopersDic(_Excel.xlReferenceKo202);
                 for (int i = 6; i <= lastRow; i++)
                 {
                     if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
