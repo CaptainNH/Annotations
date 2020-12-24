@@ -348,6 +348,7 @@ namespace Competencies
                     }
                 }
                 labelLoading.Text = "Загрузка завершена";
+                MessageBox.Show("Загрузка завершена");
                 buttonGenerate.Enabled = false;
                 buttonCreate.Enabled = false;
             }
