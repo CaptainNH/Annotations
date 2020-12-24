@@ -27,6 +27,7 @@ namespace Competencies
         private static string subsectionName = "";
         private static string blockCode1 = "";
         private static string blockCode2 = "";
+        
 
         public Competencies()
         {
