@@ -80,6 +80,7 @@ namespace Competencies
                 developerReference = developersDic[subjectName.Replace(" ", "")];
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);
+            else creditUnits = 0;
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
             if ((worksheet.Cells[5][index].Value != null) || (worksheet.Cells[6][index].Value != null))
