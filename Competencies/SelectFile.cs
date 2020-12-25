@@ -25,48 +25,23 @@ namespace Competencies
 
         public static void SelectExcelWorkPlanFile(OpenFileDialog SelectFile, Label NameOfExcelFile)/*, ComboBox comboBox1*/
         {
-            try
-            {
-                DialogResult res = SelectFile.ShowDialog();
-                if (res == DialogResult.OK)
-                {
-                    NameOfExcelFile.Text = "Загрузка...";
-                    string xlPath = SelectFile.FileName;
-                    _Excel.xlApp = new Excel.Application();
-                    _Excel.xlWorkPlan = _Excel.xlApp.Workbooks.Open(xlPath);
-                    _Excel.worksheetWorkPlanComp = _Excel.xlWorkPlan.Worksheets["Компетенции"];
-                    _Excel.worksheetWorkPlanPlan = _Excel.xlWorkPlan.Worksheets["План"];
-                    _Excel.worksheetWorkPlanTitlePage = _Excel.xlWorkPlan.Worksheets["Титул"];
-                    NameOfExcelFile.Text = Path.GetFileNameWithoutExtension(xlPath);
-                }
-                else
-                    throw new Exception("Файл не выбран");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            NameOfExcelFile.Text = "Загрузка...";
+            string xlPath = SelectFile.FileName;
+            _Excel.xlApp = new Excel.Application();
+            _Excel.xlWorkPlan = _Excel.xlApp.Workbooks.Open(xlPath);
+            _Excel.worksheetWorkPlanComp = _Excel.xlWorkPlan.Worksheets["Компетенции"];
+            _Excel.worksheetWorkPlanPlan = _Excel.xlWorkPlan.Worksheets["План"];
+            _Excel.worksheetWorkPlanTitlePage = _Excel.xlWorkPlan.Worksheets["Титул"];
+            NameOfExcelFile.Text = Path.GetFileNameWithoutExtension(xlPath);
         }
+
         public static void SelectExcelDeveopersFile(OpenFileDialog SelectFile, Label NameOfDevelopersFile)/*, Label NameOfExcelFile*//*, ComboBox comboBox1*/
         {
-            try
-            {
-                DialogResult res = SelectFile.ShowDialog();
-                if (res == DialogResult.OK)
-                {
-                    NameOfDevelopersFile.Text = "Загрузка...";
-                    string xlPath = SelectFile.FileName;
-                    _Excel.xlWorkDevelopers = _Excel.xlApp.Workbooks.Open(xlPath);
-                    _Excel.xlReferenceKo204 = _Excel.xlWorkDevelopers.Worksheets["Справка КО 20-2"];
-                    NameOfDevelopersFile.Text = Path.GetFileNameWithoutExtension(xlPath);
-                }
-                else
-                    throw new Exception("Файл не выбран");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            NameOfDevelopersFile.Text = "Загрузка...";
+            string xlPath = SelectFile.FileName;
+            _Excel.xlWorkDevelopers = _Excel.xlApp.Workbooks.Open(xlPath);
+            _Excel.xlReferenceKo202 = (Excel.Worksheet)_Excel.xlWorkDevelopers.Sheets[1];
+            NameOfDevelopersFile.Text = Path.GetFileNameWithoutExtension(xlPath);
         }
     }
 }

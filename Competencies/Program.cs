@@ -18,8 +18,11 @@ namespace Competencies
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Competencies());
-            _Excel.xlApp.Quit();
-            _Excel.ClearExcel();
+            if (_Excel.xlApp != null)
+            {
+                _Excel.xlApp.Quit();
+                _Excel.ClearExcel();
+            }
         }
     }
 }

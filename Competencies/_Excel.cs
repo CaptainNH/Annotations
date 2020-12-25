@@ -18,7 +18,7 @@ namespace Competencies
         public static Excel.Worksheet worksheetWorkPlanTitlePage = null;
         //
         public static Excel.Workbook xlWorkDevelopers = null;
-        public static Excel.Worksheet xlReferenceKo204 = null;
+        public static Excel.Worksheet xlReferenceKo202 = null;
 
         public static void ClearExcel()
         {

@@ -44,6 +44,7 @@ namespace Competencies
             this.buttonOpenDevelopersFile = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.labelNameOfFolder = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // saveFileDialogSaveFile
@@ -53,27 +54,29 @@ namespace Competencies
             // buttonCreate
             // 
             this.buttonCreate.Enabled = false;
-            this.buttonCreate.Location = new System.Drawing.Point(16, 121);
+            this.buttonCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonCreate.Location = new System.Drawing.Point(23, 120);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(80, 30);
+            this.buttonCreate.Size = new System.Drawing.Size(120, 30);
             this.buttonCreate.TabIndex = 4;
-            this.buttonCreate.Text = "Сохранить";
+            this.buttonCreate.Text = "Выбрать папку";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(12, 14);
+            this.label2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(20, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 20);
+            this.label2.Size = new System.Drawing.Size(174, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Выберите файл";
+            this.label2.Text = "Выберите рабочий план";
             // 
             // buttonOpen
             // 
-            this.buttonOpen.Location = new System.Drawing.Point(16, 37);
+            this.buttonOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOpen.Location = new System.Drawing.Point(23, 40);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(80, 30);
             this.buttonOpen.TabIndex = 6;
@@ -83,58 +86,60 @@ namespace Competencies
             // 
             // openFileDialogSelectFile
             // 
-            this.openFileDialogSelectFile.Filter = "Excel|*.xls|Excel|*.xlsx";
+            this.openFileDialogSelectFile.Filter = "Excel File(*.xls; *.xlsx;)|*.xls; *.xlsx";
             // 
             // labelNameOfWorkPlanFile
             // 
-            this.labelNameOfWorkPlanFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfWorkPlanFile.Location = new System.Drawing.Point(102, 41);
+            this.labelNameOfWorkPlanFile.AutoEllipsis = true;
+            this.labelNameOfWorkPlanFile.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameOfWorkPlanFile.Location = new System.Drawing.Point(109, 49);
             this.labelNameOfWorkPlanFile.Name = "labelNameOfWorkPlanFile";
-            this.labelNameOfWorkPlanFile.Size = new System.Drawing.Size(175, 27);
+            this.labelNameOfWorkPlanFile.Size = new System.Drawing.Size(168, 27);
             this.labelNameOfWorkPlanFile.TabIndex = 7;
             this.labelNameOfWorkPlanFile.Text = "Файл не выбран";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 86);
+            this.label1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(20, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(341, 20);
+            this.label1.Size = new System.Drawing.Size(359, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Выберите место куда хотите сохранить документы";
             // 
             // labelLoading
             // 
             this.labelLoading.AutoSize = true;
-            this.labelLoading.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelLoading.Location = new System.Drawing.Point(12, 163);
+            this.labelLoading.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelLoading.Location = new System.Drawing.Point(148, 180);
             this.labelLoading.Name = "labelLoading";
-            this.labelLoading.Size = new System.Drawing.Size(78, 20);
+            this.labelLoading.Size = new System.Drawing.Size(82, 17);
             this.labelLoading.TabIndex = 9;
             this.labelLoading.Text = "Ожидание ";
             this.labelLoading.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(16, 186);
+            this.progressBar1.Location = new System.Drawing.Point(151, 200);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(575, 23);
+            this.progressBar1.Size = new System.Drawing.Size(381, 30);
             this.progressBar1.TabIndex = 10;
             // 
             // labelNameOfDevelopersFile
             // 
-            this.labelNameOfDevelopersFile.AutoSize = true;
-            this.labelNameOfDevelopersFile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfDevelopersFile.Location = new System.Drawing.Point(369, 41);
+            this.labelNameOfDevelopersFile.AutoEllipsis = true;
+            this.labelNameOfDevelopersFile.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameOfDevelopersFile.Location = new System.Drawing.Point(369, 49);
             this.labelNameOfDevelopersFile.Name = "labelNameOfDevelopersFile";
-            this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(117, 20);
+            this.labelNameOfDevelopersFile.Size = new System.Drawing.Size(163, 27);
             this.labelNameOfDevelopersFile.TabIndex = 11;
             this.labelNameOfDevelopersFile.Text = "Файл не выбран";
             // 
             // buttonOpenDevelopersFile
             // 
-            this.buttonOpenDevelopersFile.Location = new System.Drawing.Point(283, 37);
+            this.buttonOpenDevelopersFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOpenDevelopersFile.Location = new System.Drawing.Point(283, 41);
             this.buttonOpenDevelopersFile.Name = "buttonOpenDevelopersFile";
             this.buttonOpenDevelopersFile.Size = new System.Drawing.Size(80, 30);
             this.buttonOpenDevelopersFile.TabIndex = 12;
@@ -145,11 +150,11 @@ namespace Competencies
             // buttonGenerate
             // 
             this.buttonGenerate.Enabled = false;
-            this.buttonGenerate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonGenerate.Location = new System.Drawing.Point(119, 252);
-            this.buttonGenerate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonGenerate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonGenerate.Location = new System.Drawing.Point(23, 200);
+            this.buttonGenerate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonGenerate.Name = "buttonGenerate";
-            this.buttonGenerate.Size = new System.Drawing.Size(341, 53);
+            this.buttonGenerate.Size = new System.Drawing.Size(120, 30);
             this.buttonGenerate.TabIndex = 13;
             this.buttonGenerate.Text = "Сформировать";
             this.buttonGenerate.UseVisualStyleBackColor = true;
@@ -158,20 +163,32 @@ namespace Competencies
             // labelNameOfFolder
             // 
             this.labelNameOfFolder.AutoSize = true;
-            this.labelNameOfFolder.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNameOfFolder.Location = new System.Drawing.Point(102, 124);
+            this.labelNameOfFolder.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameOfFolder.Location = new System.Drawing.Point(148, 128);
             this.labelNameOfFolder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNameOfFolder.Name = "labelNameOfFolder";
-            this.labelNameOfFolder.Size = new System.Drawing.Size(128, 20);
+            this.labelNameOfFolder.Size = new System.Drawing.Size(113, 15);
             this.labelNameOfFolder.TabIndex = 14;
             this.labelNameOfFolder.Text = "Папка не выбрана";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(280, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(205, 17);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Выберите кадровую справку";
             // 
             // Competencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(603, 326);
+            this.ClientSize = new System.Drawing.Size(544, 251);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelNameOfFolder);
             this.Controls.Add(this.buttonGenerate);
             this.Controls.Add(this.buttonOpenDevelopersFile);
@@ -184,9 +201,8 @@ namespace Competencies
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonCreate);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Competencies";
-            this.Tag = "";
             this.Text = "Annotations";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -208,5 +224,6 @@ namespace Competencies
         private System.Windows.Forms.Button buttonOpenDevelopersFile;
         private System.Windows.Forms.Button buttonGenerate;
         private System.Windows.Forms.Label labelNameOfFolder;
+        private System.Windows.Forms.Label label3;
     }
 }
