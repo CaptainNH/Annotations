@@ -79,7 +79,7 @@ namespace Competencies
             directionCode = _Excel.worksheetWorkPlanTitlePage.Cells[2][16].Value.Trim(' ');
             directionAbbreviation = SelectAbbreviation();
             subjectName = worksheet.Cells[3][index].Value.Trim(' ');
-            subjectIndex = worksheet.Cells[2][index].Value.Trim(' ');
+            subjectIndex = worksheet.Cells[2][index].Value.Trim(' ') + ".";                
             subjectIndexDecoding = DecodeSubjectIndex(worksheet, index);
             subjectCompetencies = worksheet.Cells[75][index].Value.Trim(' ');
             if (_Excel.xlReferenceKo202 != null)
