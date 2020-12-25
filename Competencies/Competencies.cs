@@ -108,7 +108,8 @@ namespace Competencies
                 blockCode2 = s[1].ToLower();
                 if (!string.IsNullOrEmpty(worksheet.Cells[1][i - 1].Value)) 
                 {
-                    blockName = worksheet.Cells[1][i - 1].Value.Trim(' ') + ". "; 
+                    string[] str = worksheet.Cells[1][i - 1].Value.Trim(' ').Split('.');
+                    blockName =  str[0] +". " + str[1] + ". "; 
                     subsectionName = worksheet.Cells[1][i].Value.Trim(' ');
                 }
                 else
