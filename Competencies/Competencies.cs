@@ -62,6 +62,13 @@ namespace Competencies
             return abbreviation;
         }
 
+        public static void ClearData()
+        {
+            developerReference = "";
+            developersDic.Clear();
+            
+        }
+
         public static void PrepareData(Excel.Worksheet worksheet, Excel.Worksheet xlReference, int index)
         {
             //Подготавливаем данные для работы.
@@ -79,6 +86,8 @@ namespace Competencies
                 developerReference = developersDic[subjectName.Replace(" ", "")];
             if (!string.IsNullOrEmpty(worksheet.Cells[8][index].Value))
                 creditUnits = int.Parse(worksheet.Cells[8][index].Value);
+            else
+                creditUnits = 0;
             if (worksheet.Cells[4][index].Value != null)
                 isExam = true;
             if ((worksheet.Cells[5][index].Value != null) || (worksheet.Cells[6][index].Value != null))
@@ -340,10 +349,8 @@ namespace Competencies
                 }
                 labelLoading.Text = "Загрузка завершена";
                 MessageBox.Show("Загрузка завершена");
-                buttonGenerate.Enabled = false;
-                buttonCreate.Enabled = false;
-                progressBar1.Maximum = 0;
-                progressBar1.Value = 0;
+                Reset();
+                ClearData();
             }
             catch (Exception ex)
             {
@@ -360,6 +367,20 @@ namespace Competencies
                     maxValueOfProgressBar++;
             }
             return maxValueOfProgressBar;
+        }
+
+        private void Reset()
+        {
+            buttonGenerate.Enabled = false;
+            buttonCreate.Enabled = false;
+            progressBar1.Maximum = 0;
+            progressBar1.Value = 0;
+            labelNameOfWorkPlanFile.Text = "Файл не выбран";
+            labelNameOfDevelopersFile.Text = "Файл не выбран";
+            labelNameOfFolder.Text = "Папка не выбрана";
+            labelLoading.Text = "Ожидание";
+            _Excel.xlWorkDevelopers = null;
+            _Excel.xlReferenceKo202 = null;
         }
     }
 }
