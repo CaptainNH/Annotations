@@ -22,7 +22,6 @@ namespace Competencies
         public static int creditUnits;
         public static bool isExam = false;
         public static bool isTest = false;
-        public static int progressBarMax = 0;
         private static string blockName = "";
         private static string subsectionName = "";
         private static string blockCode1 = "";
@@ -109,7 +108,8 @@ namespace Competencies
                 blockCode2 = s[1].ToLower();
                 if (!string.IsNullOrEmpty(worksheet.Cells[1][i - 1].Value)) 
                 {
-                    blockName = worksheet.Cells[1][i - 1].Value.Trim(' ') + ". "; 
+                    string[] str = worksheet.Cells[1][i - 1].Value.Trim(' ').Split('.');
+                    blockName =  str[0] +". " + str[1] + ". "; 
                     subsectionName = worksheet.Cells[1][i].Value.Trim(' ');
                 }
                 else
@@ -265,16 +265,7 @@ namespace Competencies
                 DialogResult res = openFileDialogSelectFile.ShowDialog();
                 if (res == DialogResult.OK)
                 {
-                    progressBar1.Maximum = 0;
-                    progressBar1.Value = 0;
                     SelectFile.SelectExcelWorkPlanFile(openFileDialogSelectFile, labelNameOfWorkPlanFile);
-                    for (int i = 6; i < TotalSize(_Excel.worksheetWorkPlanPlan); i++)
-                    {
-                        if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
-                        {
-                            progressBarMax++;
-                        }
-                    }
                     buttonCreate.Enabled = true;
                 }
                 else
@@ -332,7 +323,7 @@ namespace Competencies
             //Создаем файлы аннотаций.            
             try
             {
-                progressBar1.Maximum = progressBarMax;
+                progressBar1.Maximum = MaxValueOfProgressBar(_Excel.worksheetWorkPlanPlan);
                 int lastRow = TotalSize(_Excel.worksheetWorkPlanPlan);
                 labelLoading.Text = "Загрузка...";
                 if(_Excel.xlReferenceKo202 != null)
@@ -352,11 +343,24 @@ namespace Competencies
                 MessageBox.Show("Загрузка завершена");
                 buttonGenerate.Enabled = false;
                 buttonCreate.Enabled = false;
+                progressBar1.Maximum = 0;
+                progressBar1.Value = 0;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
+        }
+        static public int MaxValueOfProgressBar(Excel.Worksheet worksheet)
+        {
+            int lastRow = TotalSize(worksheet);
+            int maxValueOfProgressBar = 0;
+            for (int i = 6; i <= lastRow; i++)
+            {
+                if (_Excel.worksheetWorkPlanPlan.Cells[74][i].Value != null || _Excel.worksheetWorkPlanPlan.Cells[10][i].Value != null)
+                    maxValueOfProgressBar++;
+            }
+            return maxValueOfProgressBar;
         }
     }
 }
